@@ -1,6 +1,6 @@
 package model;
 
-public class Users extends BaseModel implements Cloneable {
+public class Users extends BaseModel {
     private String firstname;
     private String lastname;
     private String birthday;
