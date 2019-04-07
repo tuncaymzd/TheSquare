@@ -380,6 +380,214 @@ public class App
         }
 
     */
+        getUsersAndTheirHobbies();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        getTheSkillsForEveryUser();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        getUsersWithSimilarSkills();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        findUsersWhoHaveTheSkillsNeededToApplyForAnyJobOfferMadeByASpecificCompany();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        findUsersWithSkillsThatMatchAParticularJob();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        getUsersWithAParticularEducationLevel();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        getUsersWithTheSameHobby();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        usersAndTheirEducationLevels();
     }
 
+    public static void getUsersAndTheirHobbies() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("select users.firstname, users.lastname, hobbies.title from hobbies inner join characterize on hobbies.id_hobbie = characterize.id_hobbie inner join users on users.id_user = characterize.id_user;");
+            System.out.println("--- debut test getUsersAndTheirHobbies ---");
+            System.out.println("firstname | lastname | title of hobbie");
+            while (set.next()){
+                System.out.println(set.getString(1)+"|"+set.getString(2)+"|"+set.getString(3));
+            }
+            System.out.println("--- fin test getUsersAndTheirHobbies ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test getUsersAndTheirHobbies");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void getTheSkillsForEveryUser() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("select users.firstname, users.lastname, skills.name from users inner join have on have.id_user = users.id_user join skills on have.id_skill = skills.id_skill;");
+            System.out.println("--- debut test getTheSkillsForEveryUser ---");
+            System.out.println("firstname | lastname | name of skills");
+            while (set.next()){
+                System.out.println(set.getString(1)+"|"+set.getString(2)+"|"+set.getString(3));
+            }
+            System.out.println("--- fin test getUsersAndTheirHobbies ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test getTheSkillsForEveryUser");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void getUsersWithSimilarSkills() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("select * from users inner join have on have.id_skill = 2 and users.id_user = have.id_user;");
+            System.out.println("--- debut test getUsersWithSimilarSkills ---");
+            System.out.println("id_user | firstname | lastname | birthday | city | mail | phone | description | id_skill | id_user");
+            while (set.next()){
+                System.out.println(set.getInt(1)+"|"+set.getString(2)+"|"+set.getString(3)+"|"+set.getString(4)+"|"+set.getString(5)+"|"+set.getString(6)+"|"+set.getString(7)+"|"+set.getString(8)+"|"+set.getInt(9)+"|"+set.getInt(10));
+            }
+            System.out.println("--- fin test getUsersWithSimilarSkills ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test getUsersWithSimilarSkills");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void findUsersWhoHaveTheSkillsNeededToApplyForAnyJobOfferMadeByASpecificCompany() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("select users.firstname, skills.name from users inner join job_offers on job_offers.id_compagny = 2 inner join hold on \n" +
+                    "hold.id_job_offer = job_offers.id_job_offer inner join skills on skills.id_skill = hold.id_skill inner join have on have.id_skill = skills.id_skill\n" +
+                    "and have.id_user = users.id_user;");
+            System.out.println("--- debut test findUsersWhoHaveTheSkillsNeededToApplyForAnyJobOfferMadeByASpecificCompany() ---");
+            System.out.println("firstname | name");
+            while (set.next()){
+                System.out.println(set.getString(1)+"|"+set.getString(2));
+            }
+            System.out.println("--- fin test findUsersWhoHaveTheSkillsNeededToApplyForAnyJobOfferMadeByASpecificCompany() ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test findUsersWhoHaveTheSkillsNeededToApplyForAnyJobOfferMadeByASpecificCompany()");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void findUsersWithSkillsThatMatchAParticularJob() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("select users.firstname, skills.name from users inner join job_offers on job_offers.id_job_offer = 7 inner join hold on \n" +
+                    "hold.id_job_offer = job_offers.id_job_offer inner join skills on skills.id_skill = hold.id_skill inner join have on have.id_skill = skills.id_skill\n" +
+                    "and have.id_user = users.id_user;");
+            System.out.println("--- debut test findUsersWithSkillsThatMatchAParticularJob ---");
+            System.out.println("firstname | name of skill ");
+            while (set.next()){
+                System.out.println(set.getString(1)+"|"+set.getString(2));
+            }
+            System.out.println("--- fin test findUsersWithSkillsThatMatchAParticularJob ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test findUsersWithSkillsThatMatchAParticularJob");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void getUsersWithAParticularEducationLevel() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery( "select * from users inner join receive on receive.id_education = 1 and users.id_user = receive.id_user;");
+            System.out.println("--- debut test getUsersWithAParticularEducationLevel() throws SQLException {\n---");
+            System.out.println("id_user | firstname | lastname | birthday | city | mail | phone | description | id_education | id_user");
+            while (set.next()){
+                System.out.println(set.getInt(1)+"|"+set.getString(2)+"|"+set.getString(3)+"|"+set.getString(4)+"|"+set.getString(5)+"|"+set.getString(6)+"|"+set.getString(7)+"|"+set.getString(8)+"|"+set.getInt(9)+"|"+set.getInt(10));
+            }
+            System.out.println("--- fin test getUsersWithAParticularEducationLevel ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test getUsersWithAParticularEducationLevel");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void getUsersWithTheSameHobby() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery( "select * from users inner join characterize on characterize.id_hobbie = 2 and characterize.id_user = users.id_user;");
+            System.out.println("--- debut test getUsersWithTheSameHobby() throws SQLException {\n---");
+            System.out.println("id_user | firstname | lastname | birthday | city | mail | phone | description | id_hobbie | id_user");
+            while (set.next()){
+                System.out.println(set.getInt(1)+"|"+set.getString(2)+"|"+set.getString(3)+"|"+set.getString(4)+"|"+set.getString(5)+"|"+set.getString(6)+"|"+set.getString(7)+"|"+set.getString(8)+"|"+set.getInt(9)+"|"+set.getInt(10));
+            }
+            System.out.println("--- fin test getUsersWithTheSameHobby ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test getUsersWithTheSameHobby");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
+
+    public static void usersAndTheirEducationLevels() throws SQLException {
+        try{
+            MySQLConnection.getInstance().Connection();
+            Connection connection = MySQLConnection.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("select users.firstname, users.lastname, educations.title from users inner join receive on receive.id_user = users.id_user join educations on educations.id_education = receive.id_education;");
+            System.out.println("--- debut test usersAndTheirEducationLevels ---");
+            System.out.println("firstname | lastname | title");
+            while (set.next()){
+                System.out.println(set.getString(1)+"|"+set.getString(2)+"|"+set.getString(3));
+            }
+            System.out.println("--- fin test usersAndTheirEducationLevels ---");
+            set.close();
+            statement.close();
+        } catch (SQLException e){
+            System.out.println("Error occured while test usersAndTheirEducationLevels");
+            e.printStackTrace();
+        } finally {
+            MySQLConnection.getInstance().disconnect();
+        }
+    }
 }
