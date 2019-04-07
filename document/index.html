@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+    <h1>The Square</h1>
+        <img src="the_square_mcd_final.png"/>
+        <h2>
+          Les relations USERS
+        </h2>
+        <h3>User et educations</h3>
+        <p>La table educations représente le parcours du user (obtention des diplomes etc).
+          On a une relation 0,n de user vers educations car un user peut avoir plusieurs educations ou aucune.
+          Mais une education peut être partagées par plusieurs users on a donc une relations 1,n.
+        </p>
+        <h3>User et hobbies</h3>
+          <p>La table hobbies répond au même règle et a donc des relation identique à la table educations avec users. Un user peu avoir 0 ou plusieurs hobbies.
+            Et les hobbies peuvent être lié à 1 ou plusieurs users.
+          </p>
+          <h3>User et skills</h3>
+          <p>Les relations entre users et skills sont les même que les relations précédentes car les 3 tables précedentes représentent des caractéristiques des users.</p>
+        <h2>
+          Les relations SKILLS
+        <h2>
+          <h3>Skills et job_offers</h3>
+          <p>Skills et job_offers partagent une relation 1,n des deux côtés un skills ou plusieurs skills peuvent corespondre à une ou plusieurs offres d'emplois. 
+          </p>
+          Les relations COMPAGNIES
+          <h2>
+              <h3>Compagnies et job_offers</h3>
+            <p>Une job_offers ne peut corespondre qu'à une seule compagnie d'où la relation 1,1.
+              En revanche une compagnie peut publier une ou autant d'annonce qu'elle le souhaite donc on a une relation 1,n.
+            </p>
+            <h3>Compagnies et activities_domain</h3>
+            <p>Une compagnie correspond à un domaine d'activité unique : relation 1,1.
+              (On entend coeur de métier par domaine d'activité ici, une entreprise peut très bien rechercher des profils pour différents domaine de connaissance mais la différence sera faite sur les skills).
+              En revanche un domaine d'activité peut être partagé par plusieurs compagnies on a donc une relation 1,n, car un domaine d'activité est une caractéristique de compagnie il correspond donc forcément au moins à une compagnie.
+            </p>
+
+</body>
+</html>
