@@ -1,0 +1,1 @@
+select users.firstname, users.lastname, skills.name from users inner join have on have.id_user = users.id_user join skills on have.id_skill = skills.id_skill;

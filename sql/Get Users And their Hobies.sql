@@ -1,0 +1,1 @@
+select users.firstname, users.lastname, hobbies.title from hobbies inner join characterize on hobbies.id_hobbie = characterize.id_hobbie inner join users on users.id_user = characterize.id_user;

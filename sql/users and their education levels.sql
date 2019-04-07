@@ -1,0 +1,1 @@
+select users.firstname, users.lastname, educations.title from users inner join receive on receive.id_user = users.id_user join educations on educations.id_education = receive.id_education;
