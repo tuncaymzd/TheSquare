@@ -1,1 +1,0 @@
-select * from users inner join characterize on characterize.id_hobbie = 2 and characterize.id_user = users.id_user;

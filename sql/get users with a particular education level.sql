@@ -1,1 +1,0 @@
-select * from users inner join receive on receive.id_education = 1 and users.id_user = receive.id_user;
