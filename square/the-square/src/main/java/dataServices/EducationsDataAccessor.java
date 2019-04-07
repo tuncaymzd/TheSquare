@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class EducationsDataAccessor implements IDataAccessor<Educations> {
     public EducationsDataAccessor() {
@@ -20,7 +23,7 @@ public class EducationsDataAccessor implements IDataAccessor<Educations> {
             Statement statement = connection.createStatement();
             //ne pas insérer de donnée contenant le symbole '
             String query = "'" + obj.getTitle() + "'," + "'" + obj.getDescription() + "'," + "'" + obj.getDate().toString() + "'";
-            statement.executeUpdate("INSERT into educations(name, description, date) VALUES ("+ query+");");
+            statement.executeUpdate("INSERT into educations(title, description, date) VALUES ("+ query+");");
             statement.close();
         } catch (SQLException e) {
             System.out.println("Error occured while creating an education");
@@ -44,7 +47,13 @@ public class EducationsDataAccessor implements IDataAccessor<Educations> {
                 educationsTmp.setId(set.getInt(1));
                 educationsTmp.setTitle(set.getString(2));
                 educationsTmp.setDescription(set.getString(3));
-                educationsTmp.setDate(set.getDate(4));
+                String s = set.getString(4);
+                try {
+                    educationsTmp.setDate(new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
+                            Locale.ENGLISH).parse(s));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 educationsList.add(educationsTmp);
             }
             set.close();
@@ -71,7 +80,13 @@ public class EducationsDataAccessor implements IDataAccessor<Educations> {
                 bufferEducation.setId(set.getInt(1));
                 bufferEducation.setTitle(set.getString(2));
                 bufferEducation.setDescription(set.getString(3));
-                bufferEducation.setDate(set.getDate(4));
+                String s = set.getString(4);
+                try {
+                    bufferEducation.setDate(new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
+                            Locale.ENGLISH).parse(s));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
             education = bufferEducation;
             set.close();

@@ -20,10 +20,10 @@ public class SkillsDataAccessor implements IDataAccessor<Skills> {
             Statement statement = connection.createStatement();
             //ne pas insérer de donnée contenant le symbole '
             String query = "'" + obj.getName() + "'";
-            statement.executeUpdate("INSERT into hobbies(name) VALUES ("+ query+");");
+            statement.executeUpdate("INSERT into skills(name) VALUES ("+ query+");");
             statement.close();
         } catch (SQLException e) {
-            System.out.println("Error occured while creating an hobbie");
+            System.out.println("Error occured while creating an skills");
             e.printStackTrace();
         } finally {
             MySQLConnection.getInstance().disconnect();

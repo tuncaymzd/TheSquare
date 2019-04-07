@@ -5,6 +5,7 @@ public class Companies extends BaseModel{
     long siret;
     long siren;
     String description;
+    int idActivitiy;
 
     public String getName() {
         return name;
@@ -38,11 +39,20 @@ public class Companies extends BaseModel{
         this.description = description;
     }
 
+    public int getIdActivitiy() {
+        return idActivitiy;
+    }
+
+    public void setIdActivitiy(int idActivitiy) {
+        this.idActivitiy = idActivitiy;
+    }
+
     public static class Builder {
         String name;
         String description;
         long siret;
         long siren;
+        int idActivitiy;
 
         public Builder withName(String name){
             this.name = name;
@@ -64,12 +74,18 @@ public class Companies extends BaseModel{
             return this;
         }
 
+        public Builder withIdActivitiy(int idActivitiy){
+            this.idActivitiy = idActivitiy;
+            return this;
+        }
+
         public Companies Build() {
             Companies com = new Companies();
             com.setDescription(description);
             com.setName(name);
             com.setSiren(siren);
             com.setSiret(siret);
+            com.setIdActivitiy(idActivitiy);
             return com;
         }
     }

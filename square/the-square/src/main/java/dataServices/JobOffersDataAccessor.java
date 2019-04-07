@@ -19,8 +19,8 @@ public class JobOffersDataAccessor implements IDataAccessor<JobOffers> {
         try {
             Statement statement = connection.createStatement();
             //ne pas insérer de donnée contenant le symbole '
-            String query = "'" + obj.getName() + "'," + "'" + obj.getDescription() + "'," + obj.getWage();
-            statement.executeUpdate("INSERT into hobbies(name, description, wage) VALUES ("+ query+");");
+            String query = "'" + obj.getName() + "'," + "'" + obj.getDescription() + "'," + obj.getWage() + "," + obj.getIdCompagny();
+            statement.executeUpdate("INSERT into job_offers(name, description, wage, id_compagny) VALUES ("+ query+");");
             statement.close();
         } catch (SQLException e) {
             System.out.println("Error occured while creating an job offers");
@@ -72,6 +72,7 @@ public class JobOffersDataAccessor implements IDataAccessor<JobOffers> {
                 bufferJob.setName(set.getString(2));
                 bufferJob.setDescription(set.getString(3));
                 bufferJob.setWage(set.getLong(4));
+                bufferJob.setIdCompagny(set.getInt(5));
             }
             job = bufferJob;
             set.close();

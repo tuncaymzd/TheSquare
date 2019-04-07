@@ -23,7 +23,7 @@ public class MySQLConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://127.0.0.1:3306/the_square?useSSL=false";
+            String url = "jdbc:mysql://127.0.0.1:3306/my_square?allowPublicKeyRetrieval=true&useSSL=false";
             String user = "tuncay";
             String passwd = "tuncay";
             this.connection = DriverManager.getConnection(url, user, passwd);

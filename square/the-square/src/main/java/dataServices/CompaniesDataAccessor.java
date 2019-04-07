@@ -1,6 +1,7 @@
 package dataServices;
 
 import model.Companies;
+import model.JobOffers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,8 +20,8 @@ public class CompaniesDataAccessor implements IDataAccessor<Companies> {
         try {
             Statement statement = connection.createStatement();
             //ne pas insérer de donnée contenant le symbole '
-            String query = "'" + obj.getName() + "'," + obj.getSiret() + "," + obj.getSiren() + ",'" + obj.getDescription() + "'";
-            statement.executeUpdate("INSERT into compagnies(name) VALUES ("+ query+");");
+            String query = "'" + obj.getName() + "'," + obj.getSiret() + "," + obj.getSiren() + ",'" + obj.getDescription() + "'," + obj.getIdActivitiy();
+            statement.executeUpdate("INSERT into compagnies(name, siret, siren, description,id_activity_domain) VALUES ("+ query+");");
             statement.close();
         } catch (SQLException e) {
             System.out.println("Error occured while creating an companie");
@@ -29,6 +30,7 @@ public class CompaniesDataAccessor implements IDataAccessor<Companies> {
             MySQLConnection.getInstance().disconnect();
         }
     }
+
 
     @Override
     public ArrayList<Companies> readAll() {
@@ -75,6 +77,7 @@ public class CompaniesDataAccessor implements IDataAccessor<Companies> {
                 bufferCompanie.setSiret(set.getLong(3));
                 bufferCompanie.setSiren(set.getLong(4));
                 bufferCompanie.setDescription(set.getString(5));
+                bufferCompanie.setIdActivitiy(set.getInt(6));
             }
             companie = bufferCompanie;
             set.close();
