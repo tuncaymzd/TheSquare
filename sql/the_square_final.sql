@@ -51,7 +51,7 @@ CREATE TABLE educations(
         id_education Int  Auto_increment  NOT NULL ,
         title        Varchar (50) NOT NULL ,
         description  Text NOT NULL ,
-        date         Date NOT NULL
+        date         Text NOT NULL
 	,CONSTRAINT educations_PK PRIMARY KEY (id_education)
 )ENGINE=InnoDB;
 
